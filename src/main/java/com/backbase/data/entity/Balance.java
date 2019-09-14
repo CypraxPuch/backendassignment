@@ -2,10 +2,12 @@ package com.backbase.data.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
+import java.math.BigDecimal;
+
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class Balance {
     private String currency;
-    private String amount;
+    private BigDecimal amount;
 
     public String getCurrency() {
         return currency;
@@ -15,11 +17,11 @@ public class Balance {
         this.currency = currency;
     }
 
-    public String getAmount() {
+    public BigDecimal getAmount() {
         return amount;
     }
 
-    public void setAmount(String amount) {
+    public void setAmount(BigDecimal amount) {
         this.amount = amount;
     }
 }

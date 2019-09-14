@@ -1,5 +1,6 @@
 package com.backbase.controller;
 
+import com.backbase.data.entity.TotalAmountByTxnType;
 import com.backbase.data.to.TransactionTo;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -9,8 +10,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import java.util.List;
 
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.*;
 
 
 @RunWith(SpringJUnit4ClassRunner.class)
@@ -22,20 +22,40 @@ public class BackendAssignmentControllerTest {
 
     @Test
     public void shouldReturnNotNullStringFromTransactions() {
-        List<TransactionTo> transactions = backendAssignmentControllerTest.getTransactions();
+        String bankId = "rbs";
+        String accountId = "savings-kids-john";
+        String viewId = "public";
+
+        List<TransactionTo> transactions = backendAssignmentControllerTest.getTransactions(bankId, accountId, viewId);
         assertNotNull(transactions);
-        assertTrue(transactions.size()>0);
+        assertTrue(transactions.size() > 0);
+        assertTrue(transactions.stream()
+                .allMatch(t -> t.getAccountId().equalsIgnoreCase(accountId)));
     }
 
     @Test
     public void shouldReturnNotNullStringFromTxnByType() {
-        String result = backendAssignmentControllerTest.getTransactionByType("dummyType");
-        assertNotNull(result);
+        String txnType = "SANDBOX_TAN";
+        String bankId = "rbs";
+        String accountId = "savings-kids-john";
+        String viewId = "public";
+
+        List<TransactionTo> transactions = backendAssignmentControllerTest.getTransactionByType(txnType, bankId, accountId, viewId);
+        assertNotNull(transactions);
+        assertTrue(transactions.size() > 0);
+        assertTrue(transactions.stream()
+                .allMatch(t -> t.getTransactionType().equalsIgnoreCase(txnType)));
     }
 
     @Test
     public void shouldReturnNotNullStringFromAmountByTxnType() {
-        String result = backendAssignmentControllerTest.getTotalAmountByTxnType("dummyType");
-        assertNotNull(result);
+        String txnType = "SANDBOX_TAN";
+        String bankId = "rbs";
+        String accountId = "savings-kids-john";
+        String viewId = "public";
+
+        TotalAmountByTxnType totalAmountByTxnType = backendAssignmentControllerTest.getTotalAmountByTxnType(txnType, bankId, accountId, viewId);
+        assertNotNull(totalAmountByTxnType);
+        assertEquals(txnType,totalAmountByTxnType.getTransactionType());
     }
 }

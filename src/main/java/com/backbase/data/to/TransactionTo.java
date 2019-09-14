@@ -1,14 +1,16 @@
 package com.backbase.data.to;
 
+import java.math.BigDecimal;
+
 public class TransactionTo {
     private String id;
     private String accountId;
     private String counterpartyAccount;
     private String counterpartyName;
     private String counterPartyLogoPath;
-    private String instructedAmount;
+    private BigDecimal instructedAmount;
     private String instructedCurrency;
-    private String transactionAmount;
+    private BigDecimal transactionAmount;
     private String transactionCurrency;
     private String transactionType;
     private String description;
@@ -53,11 +55,11 @@ public class TransactionTo {
         this.counterPartyLogoPath = counterPartyLogoPath;
     }
 
-    public String getInstructedAmount() {
+    public BigDecimal getInstructedAmount() {
         return instructedAmount;
     }
 
-    public void setInstructedAmount(String instructedAmount) {
+    public void setInstructedAmount(BigDecimal instructedAmount) {
         this.instructedAmount = instructedAmount;
     }
 
@@ -69,11 +71,11 @@ public class TransactionTo {
         this.instructedCurrency = instructedCurrency;
     }
 
-    public String getTransactionAmount() {
+    public BigDecimal getTransactionAmount() {
         return transactionAmount;
     }
 
-    public void setTransactionAmount(String transactionAmount) {
+    public void setTransactionAmount(BigDecimal transactionAmount) {
         this.transactionAmount = transactionAmount;
     }
 

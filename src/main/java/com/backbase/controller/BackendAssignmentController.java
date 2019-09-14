@@ -1,9 +1,10 @@
 package com.backbase.controller;
 
-import com.backbase.data.dao.OpenBankDao;
-import com.backbase.data.entity.Transaction;
+import com.backbase.data.entity.TotalAmountByTxnType;
 import com.backbase.data.to.TransactionTo;
 import com.backbase.service.BackbaseService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -18,33 +19,48 @@ import java.util.Optional;
 @RequestMapping("/transaction")
 public class BackendAssignmentController {
 
+    private static Logger logger = LoggerFactory.getLogger(BackendAssignmentController.class);
+
     private BackbaseService backbaseService;
 
     public BackendAssignmentController(@Qualifier("backbaseService") BackbaseService backbaseService) {
         this.backbaseService = backbaseService;
     }
 
-    @RequestMapping(value = {"/list","/"}, method = RequestMethod.GET)
-    public List<TransactionTo> getTransactions() {
-        System.out.println("entering to get transactions list ");
-        Optional<List<TransactionTo>> optTxnLst = backbaseService.getTransactionList();
+    @RequestMapping(value = {"/list/{bankId}/{accountId}/{viewId}"}, method = RequestMethod.GET)
+    public List<TransactionTo> getTransactions(@PathVariable String bankId, @PathVariable String accountId, @PathVariable String viewId) {
+        if( !backbaseService.validBank(bankId) ){
+            logger.info("invalid bank id");
+            return new ArrayList<>();
+        }
+
+        logger.debug("entering to get transactions list ");
+        Optional<List<TransactionTo>> optTxnLst = backbaseService.getTransactionList(bankId, accountId, viewId);
         return optTxnLst.orElse(new ArrayList<>());
     }
 
-    @RequestMapping(value = "/type/{transactionType}", method = RequestMethod.GET)
-    public String getTransactionByType(@PathVariable String transactionType) {
-        System.out.println("transaction by txn type ");
-        String result = "Txn type: " + transactionType;
+    @RequestMapping(value = "/type/{transactionType}/{bankId}/{accountId}/{viewId}", method = RequestMethod.GET)
+    public List<TransactionTo> getTransactionByType(@PathVariable String transactionType, @PathVariable String bankId, @PathVariable String accountId, @PathVariable String viewId) {
+        if( !backbaseService.validBank(bankId) ){
+            logger.info("invalid bank id");
+            return new ArrayList<>();
+        }
 
-        return result;
+        logger.debug("listing transactions by txn type ");
+        Optional<List<TransactionTo>> optTxnLst = backbaseService.getTransactionByTxnType(transactionType, bankId, accountId, viewId);
+        return optTxnLst.orElse(new ArrayList<>());
     }
 
-    @RequestMapping(value = "/amount/{transactionType}", method = RequestMethod.GET)
-    public String getTotalAmountByTxnType(@PathVariable String transactionType) {
-        System.out.println("Total amount by txn type ");
-        String result = "Total amount Txn type: " + transactionType;
+    @RequestMapping(value = "/amount/{transactionType}/{bankId}/{accountId}/{viewId}", method = RequestMethod.GET)
+    public TotalAmountByTxnType getTotalAmountByTxnType(@PathVariable String transactionType, @PathVariable String bankId, @PathVariable String accountId, @PathVariable String viewId) {
+        if( !backbaseService.validBank(bankId) ){
+            logger.info("invalid bank id");
+            return new TotalAmountByTxnType();
+        }
 
-        return result;
+        logger.debug("Total amount by txn type ");
+        Optional<TotalAmountByTxnType> totalAmountByTxnType = backbaseService.getTotalAmountByTxnType(transactionType, bankId, accountId, viewId);
+        return totalAmountByTxnType.orElse(new TotalAmountByTxnType());
     }
 
 }
