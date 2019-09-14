@@ -3,6 +3,7 @@ package com.backbase.controller;
 import com.backbase.data.entity.TotalAmountByTxnType;
 import com.backbase.data.to.TransactionTo;
 import com.backbase.service.BackbaseService;
+import io.swagger.annotations.Api;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -13,6 +14,7 @@ import java.util.List;
 import java.util.Optional;
 
 @RestController
+@Api(value = "Backend Assignment", description = "Backbase backend assignment for Gerardo Pucheta Figueroa.")
 @RequestMapping("/transaction")
 public class BackendAssignmentController {
 
