@@ -6,10 +6,7 @@ import com.backbase.service.BackbaseService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -28,6 +25,7 @@ public class BackendAssignmentController {
     }
 
     @RequestMapping(value = {"/list/{bankId}/{accountId}/{viewId}"}, method = RequestMethod.GET)
+    @ResponseBody
     public List<TransactionTo> getTransactions(@PathVariable String bankId, @PathVariable String accountId, @PathVariable String viewId) {
         if( !backbaseService.validBank(bankId) ){
             logger.info("invalid bank id");
@@ -40,6 +38,7 @@ public class BackendAssignmentController {
     }
 
     @RequestMapping(value = "/type/{transactionType}/{bankId}/{accountId}/{viewId}", method = RequestMethod.GET)
+    @ResponseBody
     public List<TransactionTo> getTransactionByType(@PathVariable String transactionType, @PathVariable String bankId, @PathVariable String accountId, @PathVariable String viewId) {
         if( !backbaseService.validBank(bankId) ){
             logger.info("invalid bank id");
@@ -52,6 +51,7 @@ public class BackendAssignmentController {
     }
 
     @RequestMapping(value = "/amount/{transactionType}/{bankId}/{accountId}/{viewId}", method = RequestMethod.GET)
+    @ResponseBody
     public TotalAmountByTxnType getTotalAmountByTxnType(@PathVariable String transactionType, @PathVariable String bankId, @PathVariable String accountId, @PathVariable String viewId) {
         if( !backbaseService.validBank(bankId) ){
             logger.info("invalid bank id");
