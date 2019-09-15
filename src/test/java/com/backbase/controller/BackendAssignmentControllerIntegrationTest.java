@@ -1,75 +1,59 @@
 package com.backbase.controller;
 
+import com.backbase.data.entity.TotalAmountByTxnType;
 import com.backbase.data.to.TransactionTo;
-import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.mockito.Mock;
-import org.mockito.MockitoAnnotations;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.MediaType;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
-import org.springframework.test.web.servlet.MockMvc;
-import org.springframework.test.web.servlet.ResultActions;
-import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 
-import java.net.URI;
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
-import java.util.UUID;
 
-import static org.junit.Assert.assertNotNull;
-import static org.mockito.Matchers.anyString;
-import static org.mockito.Mockito.*;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
+import static org.junit.Assert.*;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration("/context-backbase-it.xml")
 public class BackendAssignmentControllerIntegrationTest {
-
-    //private static final String URL_TXN_LIST = "/list/{bankId}/{accountId}/{viewId}";
-    private static final String URL_TXN_LIST = "/transaction/list/%1$s/%2$s/%3$s";
-    //private static final String URL_TXN_TYPE = "/type/{txnType}/{bankId}/{accountId}/{viewId}";
-    private static final String URL_TXN_TYPE = "/transaction/type/%1$s/%2$s/%3$s/%4$s";
-    //private static final String URL_TXN_TYPE_AMOUNT = "/amount/{txnType}/{bankId}/{accountId}/{viewId}";
-    private static final String URL_TXN_TYPE_AMOUNT = "/transaction/amount/%1$s/%2$s/%3$s/%4$s";
-
-    @Mock
+    @Autowired
     private BackendAssignmentController backendAssignmentControllerTest;
 
-    private MockMvc mockMvc;
+    @Test
+    public void shouldReturnNotNullStringFromTransactions() {
+        String bankId = "rbs";
+        String accountId = "savings-kids-john";
+        String viewId = "public";
 
-    String uuid1 = UUID.randomUUID().toString();
-    String uuid2 = UUID.randomUUID().toString();
-
-    @Before
-    public void setUp(){
-        MockitoAnnotations.initMocks(this);
-        List<TransactionTo> lst = new ArrayList<>();
-        TransactionTo to1 = new TransactionTo();
-        to1.setId(uuid1);
-        TransactionTo to2 = new TransactionTo();
-        to1.setId(uuid2);
-        lst.add(to1);
-        lst.add(to2);
-        when(backendAssignmentControllerTest.getTransactions(anyString(),anyString(),anyString()))
-                .thenReturn(lst);
-        mockMvc = MockMvcBuilders.standaloneSetup(backendAssignmentControllerTest).build();
+        List<TransactionTo> transactions = backendAssignmentControllerTest.getTransactions(bankId, accountId, viewId);
+        assertNotNull(transactions);
+        assertTrue(transactions.size() > 0);
+        assertTrue(transactions.stream()
+                .allMatch(t -> t.getAccountId().equalsIgnoreCase(accountId)));
     }
 
     @Test
-    public void testList() throws Exception {
-        String bankId = "mockedBankId";
-        String accountId = "mockedAccountId";
-        String viewId = "mockedViewId";
-        ResultActions resultActions = mockMvc.perform(get(URI.create(String.format(URL_TXN_LIST, bankId, accountId, viewId))))
-                .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8))
-                .andExpect(status().isOk())
-                .andExpect(jsonPath("$.length()").value(2));
+    public void shouldReturnNotNullStringFromTxnByType() {
+        String txnType = "SANDBOX_TAN";
+        String bankId = "rbs";
+        String accountId = "savings-kids-john";
+        String viewId = "public";
 
-        verify(backendAssignmentControllerTest).getTransactions(bankId, accountId, viewId);
+        List<TransactionTo> transactions = backendAssignmentControllerTest.getTransactionByType(txnType, bankId, accountId, viewId);
+        assertNotNull(transactions);
+        assertTrue(transactions.size() > 0);
+        assertTrue(transactions.stream()
+                .allMatch(t -> t.getTransactionType().equalsIgnoreCase(txnType)));
+    }
+
+    @Test
+    public void shouldReturnNotNullStringFromAmountByTxnType() {
+        String txnType = "SANDBOX_TAN";
+        String bankId = "rbs";
+        String accountId = "savings-kids-john";
+        String viewId = "public";
+
+        TotalAmountByTxnType totalAmountByTxnType = backendAssignmentControllerTest.getTotalAmountByTxnType(txnType, bankId, accountId, viewId);
+        assertNotNull(totalAmountByTxnType);
+        assertEquals(txnType, totalAmountByTxnType.getTransactionType());
     }
 }
