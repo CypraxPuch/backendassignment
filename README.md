@@ -5,6 +5,20 @@ Java web application based on the standard servlet spec.
 The application provide a RESTful API that retrieve transactions from ​OpenBank​ sandbox
 and transforms the data to a Backbase friendly format.
 
+##### Available endpoints:
+
+    1. Transactions list: 
+        
+        `/list/{bankId}/{accountId}/{viewId}`
+        
+    2. Transaction filter based on transaction type:
+        
+        `/type/{txnType}/{bankId}/{accountId}/{viewId}`
+        
+    3. Total amount for transaction type
+        
+        `/amount/{txnType}/{bankId}/{accountId}/{viewId}`
+
 For detailed information go to `Swagger - RESTful API Documentation` section.
 
 ##### Note: External requests are secured, please watch `Security` section
