@@ -15,6 +15,7 @@ import static org.junit.Assert.*;
 public class BankTest {
 
     private Bank bank;
+
     @Before
     public void setUp() throws Exception {
         bank = new Bank();
@@ -25,8 +26,8 @@ public class BankTest {
         assertNull(bank.getNationalIdentifier());
         String nationalIdentifier = "nationalIdentifier_01";
         bank.setNationalIdentifier(nationalIdentifier);
-        assertNotNull(bank.getNationalIdentifier() );
-        assertEquals(nationalIdentifier, bank.getNationalIdentifier() );
+        assertNotNull(bank.getNationalIdentifier());
+        assertEquals(nationalIdentifier, bank.getNationalIdentifier());
     }
 
     @Test
@@ -34,7 +35,7 @@ public class BankTest {
         assertNull(bank.getName());
         String name = "name";
         bank.setName(name);
-        assertNotNull(bank.getName() );
-        assertEquals(name, bank.getName() );
+        assertNotNull(bank.getName());
+        assertEquals(name, bank.getName());
     }
 }

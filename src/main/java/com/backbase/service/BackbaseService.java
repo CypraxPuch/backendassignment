@@ -45,19 +45,19 @@ public class BackbaseService {
         return Optional.ofNullable(lstTo);
     }
 
-    public boolean validBank(String bankId){
+    public boolean validBank(String bankId) {
         Optional<BankInfo> optBank = openBankDao.getBank(bankId);
         return optBank.isPresent();
     }
 
-    public Optional<List<TransactionTo>> getTransactionByTxnType(String txnType, String bankId, String accountId, String viewId){
+    public Optional<List<TransactionTo>> getTransactionByTxnType(String txnType, String bankId, String accountId, String viewId) {
         List<TransactionTo> lstTo = null;
         Optional<List<Transaction>> optTransactionList = openBankDao.getTransactionList(bankId, accountId, viewId);
 
         if (optTransactionList.isPresent()) {
             lstTo = optTransactionList.get().stream()
-                    .filter(l-> l.getDetails()!=null
-                            && l.getDetails().getType()!=null
+                    .filter(l -> l.getDetails() != null
+                            && l.getDetails().getType() != null
                             && l.getDetails().getType().equalsIgnoreCase(txnType))
                     .map(t -> {
                         TransactionTo to = new TransactionTo();
@@ -79,7 +79,7 @@ public class BackbaseService {
         return Optional.ofNullable(lstTo);
     }
 
-    public Optional<TotalAmountByTxnType> getTotalAmountByTxnType(String txnType, String bankId, String accountId, String viewId){
+    public Optional<TotalAmountByTxnType> getTotalAmountByTxnType(String txnType, String bankId, String accountId, String viewId) {
         TotalAmountByTxnType totalAmountByTxnType = null;
         Optional<List<Transaction>> optTransactionList = openBankDao.getTransactionList(bankId, accountId, viewId);
 
@@ -88,12 +88,12 @@ public class BackbaseService {
             totalAmountByTxnType.setTransactionType(txnType);
             totalAmountByTxnType.setTotalAmount(
                     optTransactionList.get().stream()
-                    .filter(l-> l.getDetails()!=null
-                            && l.getDetails().getType()!=null
-                            && l.getDetails().getType().equalsIgnoreCase(txnType))
-                    .map(t-> t.getDetails().getValue().getAmount())
-                    .reduce(BigDecimal.ZERO, BigDecimal::add)
-                    );
+                            .filter(l -> l.getDetails() != null
+                                    && l.getDetails().getType() != null
+                                    && l.getDetails().getType().equalsIgnoreCase(txnType))
+                            .map(t -> t.getDetails().getValue().getAmount())
+                            .reduce(BigDecimal.ZERO, BigDecimal::add)
+            );
 
         }
         return Optional.ofNullable(totalAmountByTxnType);

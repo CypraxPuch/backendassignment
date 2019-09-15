@@ -4,18 +4,18 @@
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
 
-    <bean id="restTemplateTest" class="org.springframework.web.client.RestTemplate" />
+    <bean id="restTemplateTest" class="org.springframework.web.client.RestTemplate"/>
 
     <bean id="openBankDaoTest" class="com.backbase.data.dao.OpenBankDao">
-        <constructor-arg name="restTemplate" ref="restTemplateTest" />
+        <constructor-arg name="restTemplate" ref="restTemplateTest"/>
     </bean>
 
-    <bean id="backbaseServiceTest" class="com.backbase.service.BackbaseService"  >
-        <constructor-arg name="openBankDao" ref="openBankDaoTest" />
+    <bean id="backbaseServiceTest" class="com.backbase.service.BackbaseService">
+        <constructor-arg name="openBankDao" ref="openBankDaoTest"/>
     </bean>
 
-    <bean id="backendAssignmentControllerTest" class="com.backbase.controller.BackendAssignmentController" >
-        <constructor-arg name="backbaseService" ref="backbaseServiceTest" />
+    <bean id="backendAssignmentControllerTest" class="com.backbase.controller.BackendAssignmentController">
+        <constructor-arg name="backbaseService" ref="backbaseServiceTest"/>
     </bean>
 
 </beans>

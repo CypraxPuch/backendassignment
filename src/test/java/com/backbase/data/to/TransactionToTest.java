@@ -17,6 +17,7 @@ import static org.junit.Assert.*;
 public class TransactionToTest {
 
     private TransactionTo transactionTo;
+
     @Before
     public void setUp() throws Exception {
         transactionTo = new TransactionTo();

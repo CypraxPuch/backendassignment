@@ -15,6 +15,7 @@ import static org.junit.Assert.*;
 public class BankInfoTest {
 
     private BankInfo bankInfo;
+
     @Before
     public void setUp() throws Exception {
         bankInfo = new BankInfo();
@@ -25,8 +26,8 @@ public class BankInfoTest {
         assertNull(bankInfo.getId());
         String id = "id_01";
         bankInfo.setId(id);
-        assertNotNull(bankInfo.getId() );
-        assertEquals(id, bankInfo.getId() );
+        assertNotNull(bankInfo.getId());
+        assertEquals(id, bankInfo.getId());
     }
 
     @Test
@@ -34,8 +35,8 @@ public class BankInfoTest {
         assertNull(bankInfo.getShortName());
         String shortName = "shortName_01";
         bankInfo.setShortName(shortName);
-        assertNotNull(bankInfo.getShortName() );
-        assertEquals(shortName, bankInfo.getShortName() );
+        assertNotNull(bankInfo.getShortName());
+        assertEquals(shortName, bankInfo.getShortName());
     }
 
     @Test
@@ -43,8 +44,8 @@ public class BankInfoTest {
         assertNull(bankInfo.getFullName());
         String fullName = "fullName_01";
         bankInfo.setFullName(fullName);
-        assertNotNull(bankInfo.getFullName() );
-        assertEquals(fullName, bankInfo.getFullName() );
+        assertNotNull(bankInfo.getFullName());
+        assertEquals(fullName, bankInfo.getFullName());
     }
 
     @Test
@@ -52,8 +53,8 @@ public class BankInfoTest {
         assertNull(bankInfo.getLogo());
         String logo = "logo_01";
         bankInfo.setLogo(logo);
-        assertNotNull(bankInfo.getLogo() );
-        assertEquals(logo, bankInfo.getLogo() );
+        assertNotNull(bankInfo.getLogo());
+        assertEquals(logo, bankInfo.getLogo());
     }
 
     @Test
@@ -61,7 +62,7 @@ public class BankInfoTest {
         assertNull(bankInfo.getWebsite());
         String website = "website_01";
         bankInfo.setWebsite(website);
-        assertNotNull(bankInfo.getWebsite() );
-        assertEquals(website, bankInfo.getWebsite() );
+        assertNotNull(bankInfo.getWebsite());
+        assertEquals(website, bankInfo.getWebsite());
     }
 }

@@ -26,7 +26,7 @@ public class BackbaseServiceTest {
     private BackbaseService service;
 
     @Before
-    public void setUp(){
+    public void setUp() {
         service = new BackbaseService(new OpenBankDao(new RestTemplate()));
     }
 

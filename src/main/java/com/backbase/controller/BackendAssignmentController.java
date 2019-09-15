@@ -29,7 +29,7 @@ public class BackendAssignmentController {
     @RequestMapping(value = {"/list/{bankId}/{accountId}/{viewId}"}, method = RequestMethod.GET)
     @ResponseBody
     public List<TransactionTo> getTransactions(@PathVariable String bankId, @PathVariable String accountId, @PathVariable String viewId) {
-        if( !backbaseService.validBank(bankId) ){
+        if (!backbaseService.validBank(bankId)) {
             logger.info("invalid bank id");
             return new ArrayList<>();
         }
@@ -42,7 +42,7 @@ public class BackendAssignmentController {
     @RequestMapping(value = "/type/{transactionType}/{bankId}/{accountId}/{viewId}", method = RequestMethod.GET)
     @ResponseBody
     public List<TransactionTo> getTransactionByType(@PathVariable String transactionType, @PathVariable String bankId, @PathVariable String accountId, @PathVariable String viewId) {
-        if( !backbaseService.validBank(bankId) ){
+        if (!backbaseService.validBank(bankId)) {
             logger.info("invalid bank id");
             return new ArrayList<>();
         }
@@ -55,7 +55,7 @@ public class BackendAssignmentController {
     @RequestMapping(value = "/amount/{transactionType}/{bankId}/{accountId}/{viewId}", method = RequestMethod.GET)
     @ResponseBody
     public TotalAmountByTxnType getTotalAmountByTxnType(@PathVariable String transactionType, @PathVariable String bankId, @PathVariable String accountId, @PathVariable String viewId) {
-        if( !backbaseService.validBank(bankId) ){
+        if (!backbaseService.validBank(bankId)) {
             logger.info("invalid bank id");
             return new TotalAmountByTxnType();
         }

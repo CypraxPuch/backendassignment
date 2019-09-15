@@ -4,7 +4,6 @@ import org.junit.Before;
 import org.junit.Test;
 
 import java.math.BigDecimal;
-import java.util.UUID;
 
 import static org.junit.Assert.*;
 
@@ -18,6 +17,7 @@ import static org.junit.Assert.*;
 public class BalanceTest {
 
     private Balance balance;
+
     @Before
     public void setUp() throws Exception {
         balance = new Balance();
@@ -28,8 +28,8 @@ public class BalanceTest {
         assertNull(balance.getCurrency());
         String currency = "currency_01";
         balance.setCurrency(currency);
-        assertNotNull(balance.getCurrency() );
-        assertEquals(currency, balance.getCurrency() );
+        assertNotNull(balance.getCurrency());
+        assertEquals(currency, balance.getCurrency());
     }
 
     @Test
@@ -37,7 +37,7 @@ public class BalanceTest {
         assertNull(balance.getAmount());
         BigDecimal amount = new BigDecimal("10.55");
         balance.setAmount(amount);
-        assertNotNull(balance.getAmount() );
-        assertEquals(amount, balance.getAmount() );
+        assertNotNull(balance.getAmount());
+        assertEquals(amount, balance.getAmount());
     }
 }
