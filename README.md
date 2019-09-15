@@ -41,6 +41,15 @@ For detailed information go to `Swagger - RESTful API Documentation` section.
 
     `<TOMCAT-HOME>/bin/startup.sh`
 
+6. Send requests to the endpoints.
+
+    `curl -u user:password localhost:8080/backendassignment/transaction/amount/SANDBOX_TAN/rbs/savings-kids-john/public`
+
+    `curl -u user:password localhost:8080/backendassignment/transaction/type/SANDBOX_TAN/rbs/savings-kids-john/public`
+    
+    `curl -u user:password localhost:8080/backendassignment/transaction/list/rbs/savings-kids-john/public`
+    
+    Important: If credentials are not provided then the endpoint will not response anything.
 
 # Swagger - RESTful API Documentation
 
