@@ -42,8 +42,8 @@ public class BackendAssignmentControllerTest {
 
     private MockMvc mockMvc;
 
-    String uuid1 = UUID.randomUUID().toString();
-    String uuid2 = UUID.randomUUID().toString();
+    private String uuid1 = UUID.randomUUID().toString();
+    private String uuid2 = UUID.randomUUID().toString();
 
     @Before
     public void setUp() {
