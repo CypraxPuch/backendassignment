@@ -6,7 +6,7 @@ import java.util.List;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class TransactionResponse {
-    List<Transaction> transactions;
+    private List<Transaction> transactions;
 
     public List<Transaction> getTransactions() {
         return transactions;
