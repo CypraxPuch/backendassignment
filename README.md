@@ -37,10 +37,10 @@
 
   Once the application is Up & Running, you can find the API documentation in:
 
-  ### UI
+  ### UI (Recommended as this is a very friendly view)
   http://localhost:8080/backendassignment/swagger-ui.html
 
-  ### Documentation json
+  ### Json format
   http://localhost:8080/backendassignment/v2/api-docs
 
 # Security
