@@ -3,7 +3,7 @@ package com.backbase.data.entity;
 import org.junit.Before;
 import org.junit.Test;
 
-import java.util.Collections;
+import java.util.Arrays;
 
 import static org.junit.Assert.*;
 
@@ -28,7 +28,7 @@ public class TransactionResponseTest {
         assertNull(transactionResponse.getTransactions());
         Transaction transaction = new Transaction();
         transaction.setId("txn_id_01");
-        transactionResponse.setTransactions(Collections.singletonList(transaction));
+        transactionResponse.setTransactions(Arrays.asList(transaction));
         assertNotNull(transactionResponse.getTransactions());
         assertEquals("txn_id_01", transactionResponse.getTransactions().get(0).getId());
 

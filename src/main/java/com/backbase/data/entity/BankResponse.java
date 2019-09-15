@@ -13,7 +13,7 @@ import java.util.List;
  */
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class BankResponse {
-    private List<BankInfo> banks;
+    List<BankInfo> banks;
 
     public List<BankInfo> getBanks() {
         return banks;
