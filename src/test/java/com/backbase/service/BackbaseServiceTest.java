@@ -31,6 +31,16 @@ public class BackbaseServiceTest {
     }
 
     @Test
+    public void testEmptyTransactionList() {
+        String bankId = "qwerty";
+        String accountId = "myaccount";
+        String viewId = "myview";
+
+        Optional<List<TransactionTo>> optTransactionList = service.getTransactionList(bankId, accountId, viewId);
+        assertFalse(optTransactionList.isPresent());
+    }
+
+    @Test
     public void getTransactionList() {
         String bankId = "rbs";
         String accountId = "savings-kids-john";
@@ -68,10 +78,21 @@ public class BackbaseServiceTest {
 
     @Test
     public void invalidBank() {
-        String bankId = "pucheta";
+        String bankId = "pucheta_invalid_bank";
 
         boolean validBank = service.validBank(bankId);
         assertFalse(validBank);
+    }
+
+    @Test
+    public void testEmptyTransactionByTxnType() {
+        String bankId = "qwerty";
+        String accountId = "myaccount";
+        String viewId = "myview";
+        String txnType = "xType";
+
+        Optional<List<TransactionTo>> optTransactionList = service.getTransactionByTxnType(txnType, bankId, accountId, viewId);
+        assertFalse(optTransactionList.isPresent());
     }
 
     @Test
@@ -104,16 +125,27 @@ public class BackbaseServiceTest {
     }
 
     @Test
+    public void testEmptyTotalAmountByTxnType() {
+        String bankId = "qwerty";
+        String accountId = "myaccount";
+        String viewId = "myview";
+        String txnType = "xType";
+
+        Optional<TotalAmountByTxnType> optTotalAmountByTxnType = service.getTotalAmountByTxnType(txnType, bankId, accountId, viewId);
+        assertFalse(optTotalAmountByTxnType.isPresent());
+    }
+
+    @Test
     public void getTotalAmountByTxnType() {
         String bankId = "rbs";
         String accountId = "savings-kids-john";
         String viewId = "public";
         String txnType = "sandbox-payment";
 
-        Optional<TotalAmountByTxnType> totalAmountByTxnType = service.getTotalAmountByTxnType(txnType, bankId, accountId, viewId);
-        assertNotNull(totalAmountByTxnType);
-        assertTrue(totalAmountByTxnType.isPresent());
-        TotalAmountByTxnType totalAmountByTxnType1 = totalAmountByTxnType.orElse(new TotalAmountByTxnType());
+        Optional<TotalAmountByTxnType> optTotalAmountByTxnType = service.getTotalAmountByTxnType(txnType, bankId, accountId, viewId);
+        assertNotNull(optTotalAmountByTxnType);
+        assertTrue(optTotalAmountByTxnType.isPresent());
+        TotalAmountByTxnType totalAmountByTxnType1 = optTotalAmountByTxnType.orElse(new TotalAmountByTxnType());
         assertEquals(txnType, totalAmountByTxnType1.getTransactionType());
         assertEquals(new BigDecimal("73.76"), totalAmountByTxnType1.getTotalAmount());
     }
