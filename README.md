@@ -31,10 +31,10 @@ For detailed information go to `Swagger - RESTful API Documentation` section.
 
 2. Change to the recent directory created `$ cd backendassignment/`
     
-3. Add execution permissions to the startUp script shell:
+3. Add execution permissions to the startUp shell script:
     `chmod 775 startUpBackendAssignment.sh` 
 
-3. Execute startup shell script from Tomcat.
+3. Execute startup shell script.
 
     `./startUpBackendAssignment.sh`
 
