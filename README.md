@@ -29,31 +29,14 @@ For detailed information go to `Swagger - RESTful API Documentation` section.
 
     `git clone https://github.com/CypraxPuch/backendassignment.git`
 
-2. Build the project
-
-    Change to the recent directory created `$ cd backendassignment/`
+2. Change to the recent directory created `$ cd backendassignment/`
     
-    Execute `$ mvn clean install`
+3. Add execution permissions to the startUp script shell:
+    `chmod 775 startUpBackendAssignment.sh` 
 
-3. A `war file` should be generated inside the project directory `tarjet/`
-    
-    ### Example
-    
-    if your `home directory` is: `/home/gpucheta/proyectos/backbase/backendassignment/`
-    
-    then the `war file` will be located in: 
-    
-    `/home/gpucheta/proyectos/backbase/backendassignment/target`
-    
-    The `war file name` is: `backendassignment.war`   
+3. Execute startup shell script from Tomcat.
 
-    ##### Important: You can deploy the `war file` in any Application Server, for this example i've used Apache-Tomcat v8.5.45
-
-4. Copy the war file generated in step 3, into `webapps` directory of your Tomcat installation.
-
-5. Execute startup shell script from Tomcat.
-
-    `<TOMCAT-HOME>/bin/startup.sh`
+    `./startUpBackendAssignment.sh`
 
 6. Send requests to the endpoints.
 
