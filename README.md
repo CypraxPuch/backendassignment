@@ -9,15 +9,15 @@ and transforms the data to a Backbase friendly format.
 
     1. Transactions list: 
         
-        `/list/{bankId}/{accountId}/{viewId}`
+        `/transaction/list/{bankId}/{accountId}/{viewId}`
         
     2. Transaction filter based on transaction type:
         
-        `/type/{txnType}/{bankId}/{accountId}/{viewId}`
+        `/transaction/type/{txnType}/{bankId}/{accountId}/{viewId}`
         
     3. Total amount for transaction type
         
-        `/amount/{txnType}/{bankId}/{accountId}/{viewId}`
+        `/transaction/amount/{txnType}/{bankId}/{accountId}/{viewId}`
 
 For detailed information go to `Swagger - RESTful API Documentation` section.
 
